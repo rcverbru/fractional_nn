@@ -1,5 +1,6 @@
-# ignore ALL .log files
-# *.log
+# ignore Files
+*.npy
+*.pt
 
 # ignore ALL files in ANY directory
 runs/
