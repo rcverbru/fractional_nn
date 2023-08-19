@@ -35,8 +35,20 @@ for count in range(N):
     c = np.random.randint(-5,5)
     d = np.random.randint(-5,5)
     print("Sin/Cos (0/1): ", coef, "Yes: ", a, b, c, d)
-    
-
+    newx = np.zeros((1,D_in))
+    newy = np.zeros((1,D_in))
+    newhalf = np.zeros((1,D_in))
+    for term in range(terms):
+        newx += coefs[term]*t**orders[term]
+        # newhalf += coefs[term]*gamma(orders[term]+1)\
+                # /gamma(orders[term]+1-0.5)*t**(orders[term]-0.5)
+        if orders[term] > 0:
+            newhalf += coefs[term]*gamma(orders[term]+1)\
+                    /gamma(orders[term]+1-0.5)*t**(orders[term]-0.5)
+            newy += coefs[term]*orders[term]*t**(orders[term]-1)
+    x = np.append(x,newx,axis=0)
+    y = np.append(y,newy,axis=0)
+    half = np.append(half,newhalf,axis=0)
 
 np.save('x.npy', x)
 np.save('y.npy', y)
